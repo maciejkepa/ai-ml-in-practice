@@ -1,2 +1,2 @@
-# ai-ml-in-practice
-Repository for AI/ML in Practice series materials: real-world examples, notebooks, diagrams, and code showing data prep, model training, MLOps, and generative AI in action
+# AI/ML in practice - from theory to deployment
+A series of nine technical sessions guiding participants step by step through the entire process of creating and deploying machine learning models – from data preparation, through training and MLOps, to leveraging generative AI. Each session combines practical knowledge, code, and real-world examples. The goal of the series is to build a solid understanding of how to effectively design, implement, and maintain ML solutions in production environments.
