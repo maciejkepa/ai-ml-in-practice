@@ -15,3 +15,25 @@ A series of nine technical sessions guiding participants step by step through th
 | 7 | **ML Pipelines - Automation and CI/CD** | Build a repeatable ML workflow. | • Orchestration: Airflow, Databricks Jobs<br>• CI/CD for ML (GitHub Actions, Azure DevOps)<br>• Model registry and versioning (MLflow, Azure ML)<br>• **Demo:** pipeline in Databricks |
 | 8 | **MLOps - Manage Your ML Solution** | Get a full view of the ML lifecycle in production. | • MLflow tracking and registry in practice<br>• Model monitoring and data drift<br>• Canary deployments and A/B testing<br>• **Demo:** model monitoring in Databricks + Azure Monitor |
 | 9 | **Generative AI and LLMs - The New Wave of Technology** | Understand how LLMs reshape ML architecture. | • How LLMs differ from classical ML<br>• Transformer architecture – high level<br>• RAG (Retrieval-Augmented Generation)<br>• AI Agents and orchestration (LangChain, Semantic Kernel)<br>• **Demo:** simple RAG in Azure OpenAI |
+
+# Setup
+
+Before starting the workshop, complete the steps below to prepare your Databricks environment.
+
+### 1. Create a Databricks Free Edition account
+Go to:  
+https://www.databricks.com/learn/free-edition  
+Sign up and finish the onboarding process.
+
+### 2. Open your Databricks workspace
+Once logged in, navigate to your workspace.  
+In the **Home** folder, click **Create → Git folder**.
+
+### 3. Connect the workshop repository
+When prompted:
+
+- **Git provider:** GitHub  
+- **Repository URL:** https://github.com/maciejkepa/ai-ml-in-practice
+
+This will clone the workshop materials directly into your workspace.
+
