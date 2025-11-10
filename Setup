@@ -1,0 +1,20 @@
+## Setup
+
+Before starting the workshop, complete the steps below to prepare your Databricks environment.
+
+### 1. Create a Databricks Free Edition account
+Go to:  
+https://www.databricks.com/learn/free-edition  
+Sign up and finish the onboarding process.
+
+### 2. Open your Databricks workspace
+Once logged in, navigate to your workspace.  
+In the **Home** folder, click **Create → Git folder**.
+
+### 3. Connect the workshop repository
+When prompted:
+
+- **Git provider:** GitHub  
+- **Repository URL:** https://github.com/maciejkepa/ai-ml-in-practice
+
+This will clone the workshop materials directly into your workspace.
