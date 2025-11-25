@@ -1,0 +1,22 @@
+{
+  "data": {
+    "asset": {
+      "id": "3e3464f2-1054-416b-aa03-066154b519a6",
+      "name": "telco_silver_df"
+    },
+    "batch_definition": {
+      "id": "a6cce22e-60fc-4714-9d9c-998fd6baa08e",
+      "name": "telco_batch_definition"
+    },
+    "datasource": {
+      "id": "3ed14d58-fc58-467a-bacc-e3780dc8a570",
+      "name": "telco_silver"
+    }
+  },
+  "id": "0885797f-b230-4200-8e31-a37926a6710a",
+  "name": "telco_silver_validation",
+  "suite": {
+    "id": "4a8275c2-7e31-45f6-9854-fde703a4934b",
+    "name": "silver_suite"
+  }
+}

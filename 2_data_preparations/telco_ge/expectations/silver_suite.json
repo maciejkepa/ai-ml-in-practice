@@ -1,0 +1,118 @@
+{
+  "expectations": [
+    {
+      "id": "9a1cb59a-7a0a-488b-922f-34b3b29399c3",
+      "kwargs": {
+        "column": "customer_id"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "b14dc0be-566d-4a51-8e9f-c05a87c57723",
+      "kwargs": {
+        "column": "churn"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "35fbed9e-7121-4055-9f83-1457d02a5599",
+      "kwargs": {
+        "column": "senior_citizen",
+        "type_": "BooleanType"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_of_type"
+    },
+    {
+      "id": "0693e295-c026-46d0-83db-2e09da403fc4",
+      "kwargs": {
+        "column": "partner",
+        "type_": "BooleanType"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_of_type"
+    },
+    {
+      "id": "80a3c1e3-f161-43d0-ac7e-112e97c0c885",
+      "kwargs": {
+        "column": "dependents",
+        "type_": "BooleanType"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_of_type"
+    },
+    {
+      "id": "6b744eb0-140b-400d-906f-e1bf3d451279",
+      "kwargs": {
+        "column": "phone_service",
+        "type_": "BooleanType"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_of_type"
+    },
+    {
+      "id": "8a9dfbe2-2d16-4db0-9577-86e030059e11",
+      "kwargs": {
+        "column": "internet_service",
+        "type_": "BooleanType"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_of_type"
+    },
+    {
+      "id": "8fd7038b-0c34-46d3-a899-bdf0995b7faf",
+      "kwargs": {
+        "column": "paperless_billing",
+        "type_": "BooleanType"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_of_type"
+    },
+    {
+      "id": "5c9449b6-ee04-4a83-8ef7-f8715292f1fa",
+      "kwargs": {
+        "column": "churn",
+        "type_": "BooleanType"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_of_type"
+    },
+    {
+      "id": "724843e4-d2b2-418f-a937-32269471fe11",
+      "kwargs": {
+        "column": "tenure",
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "1a935f40-e3bf-4a75-9c8f-de36cb3bcdb6",
+      "kwargs": {
+        "column": "total_charges",
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    }
+  ],
+  "id": "4a8275c2-7e31-45f6-9854-fde703a4934b",
+  "meta": {
+    "great_expectations_version": "1.9.0"
+  },
+  "name": "silver_suite",
+  "notes": null
+}
