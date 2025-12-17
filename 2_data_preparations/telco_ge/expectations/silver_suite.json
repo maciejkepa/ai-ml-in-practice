@@ -1,7 +1,7 @@
 {
   "expectations": [
     {
-      "id": "9a1cb59a-7a0a-488b-922f-34b3b29399c3",
+      "id": "20a24443-d00a-451c-8784-a96f0b3d4be0",
       "kwargs": {
         "column": "customer_id"
       },
@@ -10,7 +10,7 @@
       "type": "expect_column_values_to_not_be_null"
     },
     {
-      "id": "b14dc0be-566d-4a51-8e9f-c05a87c57723",
+      "id": "a9f84dc2-a2cc-466d-8f28-97c74e3f6a66",
       "kwargs": {
         "column": "churn"
       },
@@ -19,7 +19,7 @@
       "type": "expect_column_values_to_not_be_null"
     },
     {
-      "id": "35fbed9e-7121-4055-9f83-1457d02a5599",
+      "id": "3d40020f-9ff8-4943-bc52-9a2a8871c3f2",
       "kwargs": {
         "column": "senior_citizen",
         "type_": "BooleanType"
@@ -29,7 +29,7 @@
       "type": "expect_column_values_to_be_of_type"
     },
     {
-      "id": "0693e295-c026-46d0-83db-2e09da403fc4",
+      "id": "98bd5313-06fd-4d54-8beb-bcde9d537824",
       "kwargs": {
         "column": "partner",
         "type_": "BooleanType"
@@ -39,7 +39,7 @@
       "type": "expect_column_values_to_be_of_type"
     },
     {
-      "id": "80a3c1e3-f161-43d0-ac7e-112e97c0c885",
+      "id": "b155a365-3c99-47c4-b23b-5bbbb4b62ebd",
       "kwargs": {
         "column": "dependents",
         "type_": "BooleanType"
@@ -49,7 +49,7 @@
       "type": "expect_column_values_to_be_of_type"
     },
     {
-      "id": "6b744eb0-140b-400d-906f-e1bf3d451279",
+      "id": "d4ac4746-4fd0-4ff9-903d-73702e5c6662",
       "kwargs": {
         "column": "phone_service",
         "type_": "BooleanType"
@@ -59,7 +59,7 @@
       "type": "expect_column_values_to_be_of_type"
     },
     {
-      "id": "8a9dfbe2-2d16-4db0-9577-86e030059e11",
+      "id": "bb0a8830-8974-41d9-8652-28661b04dad0",
       "kwargs": {
         "column": "internet_service",
         "type_": "BooleanType"
@@ -69,7 +69,7 @@
       "type": "expect_column_values_to_be_of_type"
     },
     {
-      "id": "8fd7038b-0c34-46d3-a899-bdf0995b7faf",
+      "id": "d4ec5bbc-424b-4941-8c26-a51c43fe2ce1",
       "kwargs": {
         "column": "paperless_billing",
         "type_": "BooleanType"
@@ -79,7 +79,7 @@
       "type": "expect_column_values_to_be_of_type"
     },
     {
-      "id": "5c9449b6-ee04-4a83-8ef7-f8715292f1fa",
+      "id": "f00613f6-9be1-4157-8e6a-7b4e272a4d6d",
       "kwargs": {
         "column": "churn",
         "type_": "BooleanType"
@@ -89,7 +89,7 @@
       "type": "expect_column_values_to_be_of_type"
     },
     {
-      "id": "724843e4-d2b2-418f-a937-32269471fe11",
+      "id": "8fc200b6-8138-4815-a29f-2ff844a232e7",
       "kwargs": {
         "column": "tenure",
         "min_value": 0.0
@@ -99,7 +99,7 @@
       "type": "expect_column_values_to_be_between"
     },
     {
-      "id": "1a935f40-e3bf-4a75-9c8f-de36cb3bcdb6",
+      "id": "52eb33b7-b142-459c-b449-247a45cb5b1d",
       "kwargs": {
         "column": "total_charges",
         "min_value": 0.0
@@ -109,7 +109,7 @@
       "type": "expect_column_values_to_be_between"
     }
   ],
-  "id": "4a8275c2-7e31-45f6-9854-fde703a4934b",
+  "id": "f3ac1328-994e-4830-932b-8a6135f54fcd",
   "meta": {
     "great_expectations_version": "1.9.0"
   },
