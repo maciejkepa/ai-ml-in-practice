@@ -6,3 +6,4 @@ scikit-learn==1.8.0
 matplotlib==3.10.8
 optuna==4.7.0
 optuna-integration==4.7.0
+tensorflow==2.20.0
