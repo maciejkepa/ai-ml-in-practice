@@ -1,0 +1,44 @@
+# Unity Catalog Resources - Infrastructure as Code
+#
+# Define UC catalogs and schemas declaratively in the bundle.
+# This ensures data governance structure is created with the bundle deployment,
+# before any pipeline tasks run.
+#
+# Benefits of declarative UC resources:
+# - Version-controlled, reproducible deployments
+# - Part of bundle lifecycle (created during `bundle deploy`)
+# - No need for setup notebooks
+# - Idiomatic Infrastructure as Code
+
+resources:
+  schemas:
+    # Models schema - ML models and metadata
+    models_schema:
+      catalog_name: ${var.catalog_name}
+      name: ${var.models_schema}
+      comment: "Models layer - Trained ML models, metadata, and audit trail"
+      properties:
+        data_layer: "models"
+        owner: "ml_engineering"
+
+    # MNIST data schema
+    mnist_data_schema:
+      catalog_name: ${var.catalog_name}
+      name: ${var.data_schema}
+      comment: "MNIST dataset - processed and split for training"
+      properties:
+        data_layer: "processed"
+        owner: "ml_engineering"
+
+  volumes:
+    # MNIST processed data volume
+    mnist_data_volume:
+      catalog_name: ${var.catalog_name}
+      schema_name: ${var.data_schema}
+      name: "processed"
+      comment: "MNIST processed data: train/val/test splits and images for model training"
+      volume_type: "MANAGED"
+
+  experiments:
+    experiment:
+      name: ${var.experiment_path}

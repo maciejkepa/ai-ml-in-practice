@@ -1,0 +1,69 @@
+bundle:
+  name: mnist-ml-pipeline-bundle
+
+# Target environments for deployment
+targets:
+  # Development environment - fast iteration, shared workspace
+  dev:
+    mode: development
+    workspace:
+      root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
+
+  # Production environment - strict governance, versioned deployments
+  prod:
+    mode: production
+    workspace:
+      root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
+
+# Variable definitions for UC catalogs, schemas, and model governance
+variables:
+  # ===== Catalog Configuration =====
+  catalog_name:
+    description: "Unity Catalog name for ML models and data"
+    default: "ai_ml_in_practice"
+
+  # ===== Schema Configuration =====
+  models_schema:
+    description: "Schema for registered ML models"
+    default: "dab_models"
+
+  data_schema:
+    description: "Schema for registered MNIST dataset"
+    default: "mnist_data"
+
+  # ===== Volume Configuration =====
+  volume_path:
+    description: "Path to data volume for storing MNIST datasets"
+    default: "/Volumes/ai_ml_in_practice/mnist_data/processed"
+
+  # ===== Experiment Configuration =====
+  experiment_path:
+    description: "Path of the MLflow experiment"
+    default: "/mnist_training"
+
+  # ===== Model Configuration =====
+  model_name:
+    description: "Base name for ML models"
+    default: "mnist_digit_classifier"
+  
+  # ===== Training Configuration =====
+  test_size:
+    description: "Fraction of data for testing (0.0-1.0)"
+    default: "0.2"
+  
+  random_state:
+    description: "Random seed for reproducibility"
+    default: 15
+
+  # ===== Model Performance Thresholds =====
+  min_accuracy_threshold:
+    description: "Minimum accuracy to register model"
+    default: "0.90"
+  
+  min_f1_threshold:
+    description: "Minimum F1 score to register model"
+    default: "0.90"
+
+# Include all resource definitions (Jobs, Pipelines, etc.)
+include:
+  - resources/*.yml

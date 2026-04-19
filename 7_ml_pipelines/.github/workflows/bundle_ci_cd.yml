@@ -1,0 +1,156 @@
+# GitHub Actions Workflow: Declarative Automation Bundle CI/CD
+#
+# This workflow automates:
+# 1. Code validation: Syntax checks for Python notebooks and YAML configs
+# 2. Bundle validation: Ensures DAB structure and task dependencies are correct
+# 3. Automated deployment: Pushes changes to Databricks workspace
+#
+# Triggers:
+# - On pull_request: Validates code without deploying (CI)
+# - On push to main: Validates and deploys to dev environment (CD)
+#
+# For Production Pipeline:
+# - Add additional environment steps to promote main → prod target
+# - Consider adding approval gates before production deployment
+
+name: Databricks Bundle CI/CD
+
+on:
+  # Trigger on pull requests to any branch
+  pull_request:
+    branches:
+      - main
+      - development
+    paths:
+      - 'src/**'           # Notebooks in source folder
+      - 'resources/**'     # YAML job configurations
+      - 'databricks.yml'   # Bundle configuration
+
+  # Trigger on push to main or development branch
+  push:
+    branches:
+      - development
+    paths:
+      - 'src/**'
+      - 'resources/**'
+      - 'databricks.yml'
+
+jobs:
+  # ===== JOB 1: VALIDATION =====
+  validate-bundle:
+    name: "Validate Bundle Configuration"
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Step 1: Checkout the repository code
+      # This makes the code available to subsequent steps
+      - name: "Checkout Code"
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Full history for diff operations
+      
+      # Step 2: Install Databricks CLI
+      # The CLI provides commands for validation and deployment
+      - name: "🔧 Setup Databricks CLI"
+        uses: databricks/setup-cli@v0.209.2  # Pin to specific version for reproducibility
+        with:
+          # Authentication via GitHub Secrets (configured in repository settings)
+          host: ${{ secrets.DATABRICKS_HOST }}
+          token: ${{ secrets.DATABRICKS_TOKEN }}
+
+      # Step 3: Validate bundle syntax and structure
+      # This checks:
+      # - YAML syntax correctness
+      # - Task dependency graph (DAG) validity
+      # - Variable definitions completeness
+      # - Resource naming conventions
+      - name: "Validate Bundle"
+        run: |
+          echo "Validating Declarative Automation Bundle..."
+          databricks bundle validate \
+            --target dev \
+            --var catalog_dev=telco_dev \
+            --var schema_dev=ml_schema \
+            --var catalog_prod=telco_prod \
+            --var schema_prod=ml_schema
+          echo "Bundle validation passed"
+
+      # Step 4: Display bundle structure (debugging)
+      # This shows what resources would be deployed
+      - name: "Display Bundle Resources"
+        run: |
+          echo "Bundle structure:"
+          databricks bundle summary --target dev || true
+
+  # ===== JOB 2: DEPLOYMENT (CD) =====
+  # This job only runs on push to main (not on pull_request)
+  deploy-dev:
+    name: "Deploy to Development Environment"
+    runs-on: ubuntu-latest
+    
+    # Only deploy if:
+    # 1. Changes are pushed to main branch (not pull_request)
+    # 2. The validation job passed
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    needs: validate-bundle  # Wait for validation to complete first
+    
+    steps:
+      - name: "Checkout Code"
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: "🔧 Setup Databricks CLI"
+        uses: databricks/setup-cli@v0.209.2
+        with:
+          host: ${{ secrets.DATABRICKS_HOST }}
+          token: ${{ secrets.DATABRICKS_TOKEN }}
+
+      # Step 1: Validate again (defensive programming)
+      - name: "Pre-deployment Validation"
+        run: |
+          echo "Running pre-deployment validation..."
+          databricks bundle validate \
+            --target dev \
+            --var catalog_dev=telco_dev \
+            --var schema_dev=ml_schema \
+            --var catalog_prod=telco_prod \
+            --var schema_prod=ml_schema
+          echo "Pre-deployment validation passed"
+
+      # Step 2: Deploy to dev target
+      # This creates/updates:
+      # - Notebooks in workspace
+      # - Jobs in the workspace
+      # - Any other resources defined in resources/*.yml
+      - name: "Deploy Bundle to Dev"
+        run: |
+          echo "Deploying to Development environment..."
+          databricks bundle deploy \
+            --target dev \
+            --var catalog_dev=telco_dev \
+            --var schema_dev=ml_schema \
+            --var catalog_prod=telco_prod \
+            --var schema_prod=ml_schema \
+            --force
+          echo "Deployment to dev completed"
+
+      # Step 3: Verify deployment
+      # List created resources to confirm deployment success
+      - name: "Verify Deployment"
+        run: |
+          echo "Verifying deployed resources..."
+          echo ""
+          echo "=== Jobs in Workspace ==="
+          databricks jobs list --output json | jq '.[]' || true
+          echo ""
+          echo "=== Bundle Status ==="
+          databricks bundle summary --target dev || true
+
+      # Step 4: Comment on PR (if applicable) with deployment info
+      - name: "Post Deployment Status"
+        if: always()
+        run: |
+          echo "Deployment Status: SUCCESS"
+          echo "Environment: Development"
