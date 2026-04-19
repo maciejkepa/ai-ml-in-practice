@@ -35,6 +35,9 @@ jobs:
   validate-bundle:
     name: "Validate Bundle Configuration"
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 7_ml_pipelines
     
     steps:
       # Step 1: Checkout the repository code
@@ -82,11 +85,9 @@ jobs:
   deploy-dev:
     name: "Deploy to Development Environment"
     runs-on: ubuntu-latest
-    
-    # Only deploy if:
-    # 1. Changes are pushed to main branch (not pull_request)
-    # 2. The validation job passed
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    defaults:
+      run:
+        working-directory: 7_ml_pipelines
     
     needs: validate-bundle  # Wait for validation to complete first
     
@@ -97,7 +98,7 @@ jobs:
           fetch-depth: 0
 
       - name: "🔧 Setup Databricks CLI"
-        uses: databricks/setup-cli@v0.209.2
+        uses: databricks/setup-cli@v0.296.0 
         with:
           host: ${{ secrets.DATABRICKS_HOST }}
           token: ${{ secrets.DATABRICKS_TOKEN }}
