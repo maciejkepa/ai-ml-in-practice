@@ -65,12 +65,7 @@ jobs:
       - name: "Validate Bundle"
         run: |
           echo "Validating Declarative Automation Bundle..."
-          databricks bundle validate \
-            --target dev \
-            --var catalog_dev=telco_dev \
-            --var schema_dev=ml_schema \
-            --var catalog_prod=telco_prod \
-            --var schema_prod=ml_schema
+          databricks bundle validate --target dev
           echo "Bundle validation passed"
 
       # Step 4: Display bundle structure (debugging)
@@ -107,12 +102,7 @@ jobs:
       - name: "Pre-deployment Validation"
         run: |
           echo "Running pre-deployment validation..."
-          databricks bundle validate \
-            --target dev \
-            --var catalog_dev=telco_dev \
-            --var schema_dev=ml_schema \
-            --var catalog_prod=telco_prod \
-            --var schema_prod=ml_schema
+          databricks bundle validate --target dev
           echo "Pre-deployment validation passed"
 
       # Step 2: Deploy to dev target
@@ -123,13 +113,7 @@ jobs:
       - name: "Deploy Bundle to Dev"
         run: |
           echo "Deploying to Development environment..."
-          databricks bundle deploy \
-            --target dev \
-            --var catalog_dev=telco_dev \
-            --var schema_dev=ml_schema \
-            --var catalog_prod=telco_prod \
-            --var schema_prod=ml_schema \
-            --force
+          databricks bundle deploy --target dev
           echo "Deployment to dev completed"
 
       # Step 3: Verify deployment
