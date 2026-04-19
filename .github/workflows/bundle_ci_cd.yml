@@ -26,7 +26,7 @@ on:
       - '7_ml_pipelines/resources/**'     # YAML job configurations
       - '7_ml_pipelines/databricks.yml'   # Bundle configuration
 
-  # Trigger on push to main or development branch
+  # Trigger on push to development branch
   push:
     branches:
       - development
