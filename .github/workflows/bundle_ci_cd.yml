@@ -46,8 +46,8 @@ jobs:
       
       # Step 2: Install Databricks CLI
       # The CLI provides commands for validation and deployment
-      - name: "🔧 Setup Databricks CLI"
-        uses: databricks/setup-cli@v0.209.2  # Pin to specific version for reproducibility
+      - name: "Setup Databricks CLI"
+        uses: databricks/setup-cli@v0.296.0  # Pin to specific version for reproducibility
         with:
           # Authentication via GitHub Secrets (configured in repository settings)
           host: ${{ secrets.DATABRICKS_HOST }}
