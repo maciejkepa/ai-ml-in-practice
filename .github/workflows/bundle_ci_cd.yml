@@ -22,18 +22,18 @@ on:
       - main
       - development
     paths:
-      - 'src/**'           # Notebooks in source folder
-      - 'resources/**'     # YAML job configurations
-      - 'databricks.yml'   # Bundle configuration
+      - '7_ml_pipelines/src/**'           # Notebooks in source folder
+      - '7_ml_pipelines/resources/**'     # YAML job configurations
+      - '7_ml_pipelines/databricks.yml'   # Bundle configuration
 
   # Trigger on push to main or development branch
   push:
     branches:
       - development
     paths:
-      - 'src/**'
-      - 'resources/**'
-      - 'databricks.yml'
+      - '7_ml_pipelines/src/**'
+      - '7_ml_pipelines/resources/**'
+      - '7_ml_pipelines/databricks.yml'
 
 jobs:
   # ===== JOB 1: VALIDATION =====
