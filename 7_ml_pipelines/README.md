@@ -1,4 +1,4 @@
-# MNIST ML Pipeline - Production Multi-Model Classification
+# MNIST ML Pipeline - Multi-Model Classification
 
 Comprehensive pipeline demonstrating **Databricks Declarative Automation Bundles (DABs)**, **MLflow tracking**, **model versioning with Unity Catalog**, and **champion comparison patterns** for MNIST digit classification (0-9).
 
@@ -109,5 +109,4 @@ This module covers ML engineering patterns using Databricks:
 # For more information:
 - Declarative Automation Bundles: https://docs.databricks.com/en/dev-tools/bundles/index.html
 - MLflow Documentation: https://mlflow.org/docs/latest/
-- Databricks Jobs API: https://docs.databricks.com/en/api/workspace/jobs/
 - GitHub Actions Documentation: https://docs.github.com/en/actions
