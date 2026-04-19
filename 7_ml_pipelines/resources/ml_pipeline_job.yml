@@ -45,9 +45,9 @@ resources:
         - name: random_state
           default: ${var.random_state}
         - name: experiment_path
-          default: "${resources.experiments.experiment.name}"
+          default: ${resources.experiments.experiment.name}
         - name: volume_path
-          default: "/Volumes/${var.catalog_name}/${var.data_schema}/${resources.volumes.mnist_data_volume.name}"
+          default: "/Volumes/${var.catalog_name}/${resources.schemas.mnist_data_schema.name}/${resources.volumes.mnist_data_volume.name}"
 
 
       timeout_seconds: 7200

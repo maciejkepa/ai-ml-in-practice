@@ -36,10 +36,14 @@ variables:
     description: "Path to data volume for storing MNIST datasets"
     default: "/Volumes/${var.catalog_name}/${var.data_schema}/processed"
 
+  volume_name:
+    description: "Name of the data volume for MNIST datasets"
+    default: "processed"
+
   # ===== Experiment Configuration =====
   experiment_path:
     description: "Path of the MLflow experiment"
-    default: "/Workspace/mnist_training"
+    default: "/Users/${workspace.current_user.userName}/mnist_training"
 
   # ===== Model Configuration =====
   model_name:

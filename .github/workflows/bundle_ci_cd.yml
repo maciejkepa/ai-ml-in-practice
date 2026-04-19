@@ -17,6 +17,15 @@ env:
 on:
   # Manual trigger for testing and debugging
   workflow_dispatch:
+    inputs:
+      MODE:
+        description: 'Deployment target environment'
+        required: true
+        default: 'dev'
+        options:
+          - dev
+          - prod
+
   # Trigger on pull requests to any branch
   pull_request:
     branches:
