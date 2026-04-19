@@ -82,7 +82,7 @@ jobs:
   # ===== JOB 2: DEPLOYMENT (CD) =====
   # This job only runs on push to main (not on pull_request)
   deploy-dev:
-    name: "Deploy to Development Environment"
+    name: "Deploy and Run Bundle"
     runs-on: ubuntu-latest
     environment: declarative_automation_bundles 
     env:
