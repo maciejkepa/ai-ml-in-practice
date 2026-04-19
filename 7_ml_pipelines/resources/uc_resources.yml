@@ -35,7 +35,7 @@ resources:
     mnist_data_volume:
       catalog_name: ${var.catalog_name}
       schema_name: ${var.data_schema}
-      name: ${var.volume_path}
+      name: "processed"
       comment: "MNIST processed data: train/val/test splits and images for model training"
       volume_type: "MANAGED"
 
