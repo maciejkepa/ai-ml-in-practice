@@ -71,7 +71,7 @@ This module covers ML engineering patterns using Databricks:
     └── uc_resources.yml                 ← Schema & volume definitions
 ```
 
-# Next Steps
+# Next steps
 - **See QUICKSTART.md** for step-by-step instructions to run the pipeline
 - **See ARCHITECTURE.md** for detailed design patterns and system architecture
 - **Explore the notebooks** to understand each training and evaluation step

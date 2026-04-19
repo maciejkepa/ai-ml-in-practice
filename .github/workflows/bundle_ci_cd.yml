@@ -19,8 +19,7 @@ on:
   # Trigger on pull requests to any branch
   pull_request:
     branches:
-      - main
-      - development
+      - "*""
     paths:
       - '7_ml_pipelines/src/**'           # Notebooks in source folder
       - '7_ml_pipelines/resources/**'     # YAML job configurations
