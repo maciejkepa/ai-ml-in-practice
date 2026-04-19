@@ -12,7 +12,7 @@
 name: Databricks Bundle CI/CD
 
 env:
-  MODE: ${{ github.ref_name == 'main' && 'prod' || 'dev' }}
+  MODE: ${{ (github.ref_name == 'master' || github.base_ref == 'master') && 'prod' || 'dev' }}
 
 on:
   # Trigger on pull requests to any branch
@@ -28,7 +28,7 @@ on:
   push:
     branches:
       - "development"
-      - "main"
+      - "master"
     paths:
       - '7_ml_pipelines/src/**'
       - '7_ml_pipelines/resources/**'

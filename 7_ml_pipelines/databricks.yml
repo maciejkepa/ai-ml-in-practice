@@ -8,10 +8,6 @@ targets:
     mode: development
     workspace:
       root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
-    variables:
-      volume_path:
-        description: "Path to data volume for storing MNIST datasets"
-        default: "/Volumes/${var.catalog_name}/dev_${workspace.current_user.short_name}_${var.data_schema}/processed"
 
   # Production environment - strict governance, versioned deployments
   prod:
@@ -43,7 +39,7 @@ variables:
   # ===== Experiment Configuration =====
   experiment_path:
     description: "Path of the MLflow experiment"
-    default: "/mnist_training"
+    default: "/Workspace/mnist_training"
 
   # ===== Model Configuration =====
   model_name:

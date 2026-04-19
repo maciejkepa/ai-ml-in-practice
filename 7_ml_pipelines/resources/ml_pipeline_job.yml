@@ -45,7 +45,7 @@ resources:
         - name: random_state
           default: ${var.random_state}
         - name: experiment_path
-          default: ${var.experiment_path}
+          default: "${resources.experiments.experiment.name}"
 
       timeout_seconds: 7200
       max_concurrent_runs: 1
@@ -61,7 +61,7 @@ resources:
           notebook_task:
             notebook_path: "../src/00_prepare_mnist.ipynb"
             base_parameters:
-              volume_path: "${var.volume_path}"
+              volume_path: "${resources.volumes.mnist_data_volume.name}"
           
           timeout_seconds: 1800
           max_retries: 1
@@ -79,7 +79,7 @@ resources:
           notebook_task:
             notebook_path: "../src/01_train_linear.ipynb"
             base_parameters:
-              volume_path: "${var.volume_path}"
+              volume_path: "${resources.volumes.mnist_data_volume.name}"
           
           timeout_seconds: 3600
           max_retries: 1
@@ -97,7 +97,7 @@ resources:
           notebook_task:
             notebook_path: "../src/02_train_xgboost.ipynb"
             base_parameters:
-              volume_path: "${var.volume_path}"
+              volume_path: "${resources.volumes.mnist_data_volume.name}"
           
           timeout_seconds: 3600
           max_retries: 1
@@ -116,7 +116,7 @@ resources:
         #   notebook_task:
         #     notebook_path: "../src/03_train_neural.ipynb"
         #     base_parameters:
-        #       volume_path: "${var.volume_path}"
+        #       volume_path: "${resources.volumes.mnist_data_volume.name}"
         #   
         #   timeout_seconds: 5400
         #   max_retries: 1
@@ -136,7 +136,7 @@ resources:
           notebook_task:
             notebook_path: "../src/05_evaluate_models.ipynb"
             base_parameters:
-              volume_path: "${var.volume_path}"
+              volume_path: "${resources.volumes.mnist_data_volume.name}"
           
           timeout_seconds: 3600
           max_retries: 0
@@ -154,9 +154,9 @@ resources:
           notebook_task:
             notebook_path: "../src/04_evaluate_champion.ipynb"
             base_parameters:
-              volume_path: "${var.volume_path}"
+              volume_path: "${resources.volumes.mnist_data_volume.name}"
               catalog_name: "${var.catalog_name}"
-              models_schema: "${var.models_schema}"
+              models_schema: "${resources.schemas.models_schema.name}"
               model_name: "${var.model_name}"
           
           timeout_seconds: 3600
@@ -177,7 +177,7 @@ resources:
             notebook_path: "../src/06_register_model.ipynb"
             base_parameters:
               catalog_name: "${var.catalog_name}"
-              models_schema: "${var.models_schema}"
+              models_schema: "${resources.schemas.models_schema.name}"
               model_name: "${var.model_name}"
           
           timeout_seconds: 3600
