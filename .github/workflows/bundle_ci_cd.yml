@@ -35,6 +35,9 @@ jobs:
   validate-bundle:
     name: "Validate Bundle Configuration"
     runs-on: ubuntu-latest
+    env:
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
     defaults:
       run:
         working-directory: 7_ml_pipelines
@@ -51,10 +54,6 @@ jobs:
       # The CLI provides commands for validation and deployment
       - name: "Setup Databricks CLI"
         uses: databricks/setup-cli@v0.296.0  # Pin to specific version for reproducibility
-        with:
-          # Authentication via GitHub Secrets (configured in repository settings)
-          host: ${{ secrets.DATABRICKS_HOST }}
-          token: ${{ secrets.DATABRICKS_TOKEN }}
 
       # Step 3: Validate bundle syntax and structure
       # This checks:
@@ -80,6 +79,9 @@ jobs:
   deploy-dev:
     name: "Deploy to Development Environment"
     runs-on: ubuntu-latest
+    env:
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
     defaults:
       run:
         working-directory: 7_ml_pipelines
