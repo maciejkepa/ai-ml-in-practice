@@ -35,6 +35,7 @@ jobs:
   validate-bundle:
     name: "Validate Bundle Configuration"
     runs-on: ubuntu-latest
+    environment: declarative_automation_bundles 
     env:
       DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
       DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
@@ -79,6 +80,7 @@ jobs:
   deploy-dev:
     name: "Deploy to Development Environment"
     runs-on: ubuntu-latest
+    environment: declarative_automation_bundles 
     env:
       DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
       DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
@@ -95,10 +97,7 @@ jobs:
           fetch-depth: 0
 
       - name: "🔧 Setup Databricks CLI"
-        uses: databricks/setup-cli@v0.296.0 
-        with:
-          host: ${{ secrets.DATABRICKS_HOST }}
-          token: ${{ secrets.DATABRICKS_TOKEN }}
+        uses: databricks/setup-cli@v0.296.0
 
       # Step 1: Validate again (defensive programming)
       - name: "Pre-deployment Validation"
