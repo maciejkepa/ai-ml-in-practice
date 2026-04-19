@@ -1,0 +1,59 @@
+# Declarative Automation Bundle artifacts
+.bundle/
+*.fuse_*
+
+# Environment and configuration
+.env
+.env.local
+*.config
+
+# Python environments
+venv/
+env/
+ENV/
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# MLflow and experiment tracking
+mlruns/
+.mlflow/
+
+# Data files
+*.csv
+*.parquet
+*.json
+data/
+datasets/
+
+# Secrets and credentials
+secrets/
+*.secret*
+.databrickscfg
+credentials.json
+personal_access_token.txt
+
+# Logs
+*.log
+logs/
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Temporary files
+tmp/
+temp/
+*.tmp

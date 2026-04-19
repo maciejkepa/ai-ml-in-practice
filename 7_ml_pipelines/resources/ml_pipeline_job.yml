@@ -1,0 +1,176 @@
+# MNIST ML Pipeline - Multi-Model Classification
+#
+# This DAB demonstrates orchestration patterns:
+# - Multiple algorithms trained in parallel for model selection
+# - Logistic Regression, XGBoost, and CNN on MNIST digits
+# - Automatic model comparison and selection
+# - Conditional execution based on evaluation metrics
+# - Comprehensive MLflow experiment tracking
+#
+# Key Orchestration Patterns:
+# 1. Data Loading: MNIST from TensorFlow Keras
+# 2. Training Loop: Multiple models in parallel
+# 3. Evaluation: Compare all 3 models, select best
+# 4. Result: Best model benchmarks
+
+resources:
+  jobs:
+    mnist_ml_pipeline:
+      name: "MNIST ML Pipeline - Multi-Model Comparison"
+      
+      description: |
+        ML pipeline with champion comparison pattern:
+        - Multi-model training with parallel execution (Logistic, XGBoost, CNN optional)
+        - Automatic model comparison and champion evaluation
+        - MNIST digit classification (0-9)
+        - Comprehensive MLflow experiment tracking
+        - Champion comparison before promotion (only register if better)
+        - Simple Volume-based data storage
+        
+        Task DAG (Phase 1):
+        1. [Data Prep] Load MNIST from TensorFlow, save to Volume
+        2. [Train Linear] → Logistic Regression (parallel)
+        3. [Train XGBoost] → Gradient Boosting (parallel)
+        4. [Evaluate] Compare 2 new models, select best
+        5. [Evaluate Champion] Load current champion, prepare comparison
+        6. [Register] Register best only if better than champion (or first run)
+        
+        Phase 2 - Uncomment CNN in ml_pipeline_job.yml for full pipeline
+        
+        Quality Gates:
+        - Minimum Accuracy: 90%
+        - Minimum F1 Score: 90%
+      
+      parameters:
+        - name: random_state
+          default: ${var.random_state}
+        - name: experiment_path
+          default: ${resources.experiments.experiment.name}
+        - name: volume_path
+          default: "/Volumes/${var.catalog_name}/${resources.schemas.mnist_data_schema.name}/${resources.volumes.mnist_data_volume.name}"
+
+
+      timeout_seconds: 7200
+      max_concurrent_runs: 1
+      
+      tasks:
+        # =============================================
+        # TASK 1: DATA PREP - Load MNIST and save
+        # =============================================
+        - task_key: prepare_mnist
+          
+          description: "Load MNIST from TensorFlow, normalize, split, save to Volume"
+          
+          notebook_task:
+            notebook_path: "../src/00_prepare_mnist.ipynb"
+          
+          timeout_seconds: 1800
+          max_retries: 1
+
+        # =============================================
+        # TASK 2: TRAIN - Logistic Regression
+        # =============================================
+        - task_key: train_linear_model
+          
+          description: "Train Logistic Regression on flattened MNIST features"
+          
+          depends_on:
+            - task_key: prepare_mnist
+          
+          notebook_task:
+            notebook_path: "../src/01_train_linear.ipynb"
+          
+          timeout_seconds: 3600
+          max_retries: 1
+
+        # =============================================
+        # TASK 3: TRAIN - XGBoost Model
+        # =============================================
+        - task_key: train_xgboost_model
+          
+          description: "Train XGBoost gradient boosting classifier on MNIST"
+          
+          depends_on:
+            - task_key: prepare_mnist
+          
+          notebook_task:
+            notebook_path: "../src/02_train_xgboost.ipynb"
+          
+          timeout_seconds: 3600
+          max_retries: 1
+
+        # =============================================
+        # TASK 4: TRAIN - CNN Neural Network (COMMENTED FOR PHASE 1)
+        # Uncomment when ready to enable full pipeline in CI/CD
+        # =============================================
+        # - task_key: train_neural_model
+        #   
+        #   description: "Train Convolutional Neural Network (TensorFlow) on MNIST images"
+        #   
+        #   depends_on:
+        #     - task_key: prepare_mnist
+        #   
+        #   notebook_task:
+        #     notebook_path: "../src/03_train_neural.ipynb"
+        #   
+        #   timeout_seconds: 5400
+        #   max_retries: 1
+
+        # =============================================
+        # TASK 5: EVALUATE - Compare new models + champion
+        # =============================================
+        - task_key: evaluate_models
+          
+          description: "Compare Logistic and XGBoost - Select best candidate"
+          
+          depends_on:
+            - task_key: train_linear_model
+            - task_key: train_xgboost_model
+            # - task_key: train_neural_model  # Uncomment when ready to enable full pipeline in CI/CD
+          
+          notebook_task:
+            notebook_path: "../src/05_evaluate_models.ipynb"
+          
+          timeout_seconds: 3600
+          max_retries: 0
+
+        # =============================================
+        # TASK 6: EVALUATE - Load and evaluate champion
+        # =============================================
+        - task_key: evaluate_champion
+          
+          description: "Load current champion from registry and compare with new candidates"
+          
+          depends_on:
+            - task_key: prepare_mnist
+          
+          notebook_task:
+            notebook_path: "../src/04_evaluate_champion.ipynb"
+            base_parameters:
+              catalog_name: "${var.catalog_name}"
+              models_schema: "${resources.schemas.models_schema.name}"
+              model_name: "${var.model_name}"
+          
+          timeout_seconds: 3600
+          max_retries: 0
+
+        # =============================================
+        # TASK 7: REGISTER - Register best if better
+        # =============================================
+        - task_key: register_model
+          
+          description: "Register best model only if better than or first compared to champion"
+          
+          depends_on:
+            - task_key: evaluate_models
+            - task_key: evaluate_champion
+          
+          notebook_task:
+            notebook_path: "../src/06_register_model.ipynb"
+            base_parameters:
+              catalog_name: "${var.catalog_name}"
+              models_schema: "${resources.schemas.models_schema.name}"
+              model_name: "${var.model_name}"
+          
+          timeout_seconds: 3600
+          max_retries: 0
