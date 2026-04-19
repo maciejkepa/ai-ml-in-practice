@@ -6,12 +6,8 @@
 # 3. Automated deployment: Pushes changes to Databricks workspace
 #
 # Triggers:
-# - On pull_request: Validates code without deploying (CI)
-# - On push to main: Validates and deploys to dev environment (CD)
-#
-# For Production Pipeline:
-# - Add additional environment steps to promote main → prod target
-# - Consider adding approval gates before production deployment
+# - On pull_request
+# - On push
 
 name: Databricks Bundle CI/CD
 
@@ -19,16 +15,16 @@ on:
   # Trigger on pull requests to any branch
   pull_request:
     branches:
-      - "*""
+      - "*"
     paths:
       - '7_ml_pipelines/src/**'           # Notebooks in source folder
       - '7_ml_pipelines/resources/**'     # YAML job configurations
       - '7_ml_pipelines/databricks.yml'   # Bundle configuration
 
-  # Trigger on push to development branch
+  # Trigger on push to any branch
   push:
     branches:
-      - development
+      - "*"
     paths:
       - '7_ml_pipelines/src/**'
       - '7_ml_pipelines/resources/**'
