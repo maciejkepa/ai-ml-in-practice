@@ -6,10 +6,13 @@
 # 3. Automated deployment: Pushes changes to Databricks workspace
 #
 # Triggers:
-# - On pull_request
-# - On push
+# - On pull_request to any branch (for validation and feedback)
+# - On push to development branch (for deployment to dev environment)
 
 name: Databricks Bundle CI/CD
+
+env:
+  MODE: ${{ github.ref_name == 'main' && 'prod' || 'dev' }}
 
 on:
   # Trigger on pull requests to any branch
@@ -25,6 +28,7 @@ on:
   push:
     branches:
       - "development"
+      - "main"
     paths:
       - '7_ml_pipelines/src/**'
       - '7_ml_pipelines/resources/**'
@@ -64,16 +68,16 @@ jobs:
       # - Resource naming conventions
       - name: "Validate Bundle"
         run: |
-          echo "Validating Declarative Automation Bundle..."
-          databricks bundle validate --target dev
+          echo "Validating Declarative Automation Bundle for target: $MODE..."
+          databricks bundle validate --target $MODE
           echo "Bundle validation passed"
 
       # Step 4: Display bundle structure (debugging)
       # This shows what resources would be deployed
       - name: "Display Bundle Resources"
         run: |
-          echo "Bundle structure:"
-          databricks bundle summary --target dev || true
+          echo "Bundle structure for target: $MODE:"
+          databricks bundle summary --target $MODE || true
 
   # ===== JOB 2: DEPLOYMENT (CD) =====
   # This job only runs on push to main (not on pull_request)
@@ -103,18 +107,18 @@ jobs:
       - name: "Pre-deployment Validation"
         run: |
           echo "Running pre-deployment validation..."
-          databricks bundle validate --target dev
+          databricks bundle validate --target $MODE
           echo "Pre-deployment validation passed"
 
-      # Step 2: Deploy to dev target
+      # Step 2: Deploy to target environment
       # This creates/updates:
       # - Notebooks in workspace
       # - Jobs in the workspace
       # - Any other resources defined in resources/*.yml
-      - name: "Deploy Bundle to Dev"
+      - name: "Deploy Bundle"
         run: |
-          echo "Deploying to Development environment..."
-          databricks bundle deploy --target dev
+          echo "Deploying to $MODE environment..."
+          databricks bundle deploy --target $MODE
           echo "Deployment to dev completed"
 
       # Step 3: Verify deployment
@@ -127,11 +131,19 @@ jobs:
           databricks jobs list --output json | jq '.[]' || true
           echo ""
           echo "=== Bundle Status ==="
-          databricks bundle summary --target dev || true
+          databricks bundle summary --target $MODE || true
+
+      # Step 4: Run the deployed bundle
+      # This executes the ML pipeline job to ensure it runs successfully after deployment
+      - name: "Run bundle"
+        run: |
+          echo "Running bundle in $MODE environment..."
+          databricks bundle run --target $MODE mnist_ml_pipeline
+          echo "Bundle execution in dev completed"
 
       # Step 4: Comment on PR (if applicable) with deployment info
       - name: "Post Deployment Status"
         if: always()
         run: |
           echo "Deployment Status: SUCCESS"
-          echo "Environment: Development"
+          echo "Environment: $MODE"
