@@ -281,7 +281,7 @@ mlflow.register_model(uri, name, tags=tags)
 - Train/val split: 80/20 of training data (48K/12K)
 
 **Storage**: `/Volumes/ai_ml_in_practice/mnist_data/processed/`
-- 8 numpy array files saved by `00_prepare_mnist.ipynb`
+- 8 numpy array files saved by `7.0_prepare_mnist.ipynb`
 - ~100 MB total size
 - Shared across all training notebooks
 

@@ -59,13 +59,13 @@ This module covers ML engineering patterns using Databricks:
 │   └── workflows/
 │       └── bundle_ci_cd.yml             ← GitHub Actions CI/CD
 ├── src/                                 ← ML Training Notebooks
-│   ├── 00_prepare_mnist.ipynb           ← Load MNIST, save to Volume
-│   ├── 01_train_linear.ipynb            ← Logistic Regression (always on)
-│   ├── 02_train_xgboost.ipynb           ← XGBoost (always on)
-│   ├── 03_train_neural.ipynb            ← CNN TensorFlow (commented Phase 1)
-│   ├── 04_evaluate_champion.ipynb       ← Load champion from registry
-│   ├── 05_evaluate_models.ipynb         ← Compare trained models
-│   └── 06_register_model.ipynb          ← Register if better than champion
+│   ├── 7.0_prepare_mnist.ipynb          ← Load MNIST, save to Volume
+│   ├── 7.1_train_linear.ipynb           ← Logistic Regression (always on)
+│   ├── 7.2_train_xgboost.ipynb          ← XGBoost (always on)
+│   ├── 7.3_train_neural.ipynb           ← CNN TensorFlow (commented Phase 1)
+│   ├── 7.4_evaluate_champion.ipynb      ← Load champion from registry
+│   ├── 7.5_evaluate_models.ipynb        ← Compare trained models
+│   └── 7.6_register_model.ipynb         ← Register if better than champion
 └── resources/                           ← Orchestration & Resources
     ├── ml_pipeline_job.yml              ← Job DAG & task dependencies
     └── uc_resources.yml                 ← Schema & volume definitions

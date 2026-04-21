@@ -62,7 +62,7 @@ resources:
           description: "Load MNIST from TensorFlow, normalize, split, save to Volume"
           
           notebook_task:
-            notebook_path: "../src/00_prepare_mnist.ipynb"
+            notebook_path: "../src/7.0_prepare_mnist.ipynb"
           
           timeout_seconds: 1800
           max_retries: 1
@@ -78,7 +78,7 @@ resources:
             - task_key: prepare_mnist
           
           notebook_task:
-            notebook_path: "../src/01_train_linear.ipynb"
+            notebook_path: "../src/7.1_train_linear.ipynb"
           
           timeout_seconds: 3600
           max_retries: 1
@@ -94,7 +94,7 @@ resources:
             - task_key: prepare_mnist
           
           notebook_task:
-            notebook_path: "../src/02_train_xgboost.ipynb"
+            notebook_path: "../src/7.2_train_xgboost.ipynb"
           
           timeout_seconds: 3600
           max_retries: 1
@@ -111,7 +111,7 @@ resources:
         #     - task_key: prepare_mnist
         #   
         #   notebook_task:
-        #     notebook_path: "../src/03_train_neural.ipynb"
+        #     notebook_path: "../src/7.3_train_neural.ipynb"
         #   
         #   timeout_seconds: 5400
         #   max_retries: 1
@@ -129,7 +129,7 @@ resources:
             # - task_key: train_neural_model  # Uncomment when ready to enable full pipeline in CI/CD
           
           notebook_task:
-            notebook_path: "../src/05_evaluate_models.ipynb"
+            notebook_path: "../src/7.5_evaluate_models.ipynb"
           
           timeout_seconds: 3600
           max_retries: 0
@@ -145,7 +145,7 @@ resources:
             - task_key: prepare_mnist
           
           notebook_task:
-            notebook_path: "../src/04_evaluate_champion.ipynb"
+            notebook_path: "../src/7.4_evaluate_champion.ipynb"
             base_parameters:
               catalog_name: "${var.catalog_name}"
               models_schema: "${resources.schemas.models_schema.name}"
@@ -166,7 +166,7 @@ resources:
             - task_key: evaluate_champion
           
           notebook_task:
-            notebook_path: "../src/06_register_model.ipynb"
+            notebook_path: "../src/7.6_register_model.ipynb"
             base_parameters:
               catalog_name: "${var.catalog_name}"
               models_schema: "${resources.schemas.models_schema.name}"

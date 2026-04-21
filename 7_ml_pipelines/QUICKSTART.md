@@ -48,13 +48,13 @@ resources/
   ├── ml_pipeline_job.yml       ← Job DAG
   └── uc_resources.yml          ← Schema + Volume resources
 src/
-  ├── 00_prepare_mnist.ipynb
-  ├── 01_train_linear.ipynb
-  ├── 02_train_xgboost.ipynb
-  ├── 03_train_neural.ipynb     ← Phase 2 only
-  ├── 04_evaluate_champion.ipynb
-  ├── 05_evaluate_models.ipynb
-  └── 06_register_model.ipynb
+  ├── 7.0_prepare_mnist.ipynb
+  ├── 7.1_train_linear.ipynb
+  ├── 7.2_train_xgboost.ipynb
+  ├── 7.3_train_neural.ipynb     ← Phase 2 only
+  ├── 7.4_evaluate_champion.ipynb
+  ├── 7.5_evaluate_models.ipynb
+  └── 7.6_register_model.ipynb
 ```
 
 ### Step 3: Validate bundle configuration
