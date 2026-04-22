@@ -103,18 +103,18 @@ resources:
         # TASK 4: TRAIN - CNN Neural Network (COMMENTED FOR PHASE 1)
         # Uncomment when ready to enable full pipeline in CI/CD
         # =============================================
-        # - task_key: train_neural_model
-        #   
-        #   description: "Train Convolutional Neural Network (TensorFlow) on MNIST images"
-        #   
-        #   depends_on:
-        #     - task_key: prepare_mnist
-        #   
-        #   notebook_task:
-        #     notebook_path: "../src/7.3_train_neural.ipynb"
-        #   
-        #   timeout_seconds: 5400
-        #   max_retries: 1
+        - task_key: train_neural_model
+          
+          description: "Train Convolutional Neural Network (TensorFlow) on MNIST images"
+          
+          depends_on:
+            - task_key: prepare_mnist
+          
+          notebook_task:
+            notebook_path: "../src/7.3_train_neural.ipynb"
+          
+          timeout_seconds: 5400
+          max_retries: 1
 
         # =============================================
         # TASK 5: EVALUATE - Compare new models + champion
@@ -126,7 +126,7 @@ resources:
           depends_on:
             - task_key: train_linear_model
             - task_key: train_xgboost_model
-            # - task_key: train_neural_model  # Uncomment when ready to enable full pipeline in CI/CD
+            - task_key: train_neural_model  # Uncomment when ready to enable full pipeline in CI/CD
           
           notebook_task:
             notebook_path: "../src/7.5_evaluate_models.ipynb"
