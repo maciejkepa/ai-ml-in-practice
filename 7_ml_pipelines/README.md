@@ -100,11 +100,6 @@ This module covers ML engineering patterns using Databricks:
    - CI/CD automates validation and deployment
    - No manual steps required after code merge
    - Ready for scheduled retraining pipelines
-6. **Production Ready**
-   - Error handling and retry logic
-   - Timeout configuration
-   - Notification system (email on failure)
-   - Compatible with Databricks Free Edition (serverless compute)
 
 # For more information:
 - Declarative Automation Bundles: https://docs.databricks.com/en/dev-tools/bundles/index.html
