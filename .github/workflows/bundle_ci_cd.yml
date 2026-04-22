@@ -26,15 +26,6 @@ on:
           - dev
           - prod
 
-  # Trigger on pull requests to any branch
-  pull_request:
-    branches:
-      - "*"
-    paths:
-      - '7_ml_pipelines/src/**'           # Notebooks in source folder
-      - '7_ml_pipelines/resources/**'     # YAML job configurations
-      - '7_ml_pipelines/databricks.yml'   # Bundle configuration
-
   # Trigger on push to any branch
   push:
     branches:
