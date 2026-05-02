@@ -1,0 +1,46 @@
+bundle:
+  name: mnist-mlops-workshop
+
+targets:
+  dev:
+    mode: development
+    workspace:
+      root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
+
+  prod:
+    mode: production
+    workspace:
+      root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
+
+
+variables:
+  catalog_name:
+    description: "Catalog used by the workshop"
+    default: "ai_ml_in_practice"
+
+  workshop_schema:
+    description: "Schema for models and workshop metadata"
+    default: "mlops_workshop"
+
+  monitoring_schema:
+    description: "Schema for workshop-specific monitoring assets"
+    default: "mlops_monitoring"
+
+  volume_name:
+    description: "Managed volume name for workshop scratch data"
+    default: "mnist_assets"
+
+  experiment_path:
+    description: "User-scoped MLflow experiment path"
+    default: "/Users/${workspace.current_user.userName}/8_mlops_mnist"
+
+  model_name:
+    description: "Registered model used by the workshop"
+    default: "mnist_cnn"
+
+  endpoint_name:
+    description: "Serverless serving endpoint created by notebook 8.2"
+    default: "mnist-serving-endpoint"
+
+include:
+  - resources/*.yml

@@ -1,0 +1,23 @@
+resources:
+  schemas:
+    workshop_schema:
+      catalog_name: ${var.catalog_name}
+      name: ${var.workshop_schema}
+      comment: "Workshop schema for the MNIST registered model"
+
+    monitoring_schema:
+      catalog_name: ${var.catalog_name}
+      name: ${var.monitoring_schema}
+      comment: "Optional schema for workshop monitoring artifacts and scratch tables"
+
+  volumes:
+    mnist_assets:
+      catalog_name: ${var.catalog_name}
+      schema_name: ${var.workshop_schema}
+      name: ${var.volume_name}
+      volume_type: MANAGED
+      comment: "Managed volume for any workshop exports or temporary MNIST assets"
+
+  experiments:
+    workshop_experiment:
+      name: ${var.experiment_path}
