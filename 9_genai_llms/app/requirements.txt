@@ -1,0 +1,5 @@
+databricks-sdk
+databricks-ai-search
+mcp[cli]
+fastapi
+uvicorn

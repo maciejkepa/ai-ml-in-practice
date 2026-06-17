@@ -1,0 +1,8 @@
+mlflow
+tensorflow==2.20.0
+pandas
+matplotlib
+databricks-ai-search
+databricks-sdk
+mcp[cli]
+requests

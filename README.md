@@ -14,7 +14,7 @@ A series of nine technical sessions guiding participants step by step through th
 | 6 | [**Deep Learning - Leveling up**](https://github.com/maciejkepa/ai-ml-in-practice/tree/master/6_deep_learning) | Understand DL concepts and implementation frameworks. | • Basics of neural networks: layers, activations, backpropagation<br>• Frameworks: TensorFlow vs PyTorch<br>• GPU, TPU, and cloud scaling<br>• **Demo:** simple neural networks in Databricks with Tensorflow |
 | 7 | [**ML Pipelines - Automation and CI/CD**](https://github.com/maciejkepa/ai-ml-in-practice/tree/master/7_ml_pipelines) | Build a repeatable ML workflow. | • Orchestration: Airflow, Databricks Jobs<br>• CI/CD for ML<br>• Model registry and versioning<br>• **Demo:** pipeline in Databricks |
 | 8 | [**MLOps - Manage Your ML Solution**](https://github.com/maciejkepa/ai-ml-in-practice/tree/master/8_mlops) | Get a full view of the ML lifecycle in production. | • MLOps aka Model as a Service<br>• Monitoring and environment management<br>• Deployment and testing strategies<br>• **Demo:** Environment management and model deployment in Databricks |
-| 9 | **Generative AI and LLMs - The New Wave of Technology** | Understand how LLMs reshape ML architecture. | • How LLMs differ from classical ML<br>• Transformer architecture – high level<br>• RAG (Retrieval-Augmented Generation)<br>• AI Agents and orchestration (LangChain, Semantic Kernel)<br>• **Demo:** simple chatbot and RAG in Databricks |
+| 9 | [**Generative AI and LLMs - The New Wave of Technology**](https://github.com/maciejkepa/ai-ml-in-practice/tree/master/9_genai_llms) | Understand how LLMs reshape ML architecture. | • How LLMs differ from classical ML<br>• Transformer architecture – high level<br>• RAG (Retrieval-Augmented Generation)<br>• AI Agents and orchestration (LangChain, Semantic Kernel)<br>• **Demo:** simple chatbot and RAG in Databricks |
 
 # Setup
 
@@ -36,4 +36,3 @@ When prompted:
 - **Repository URL:** https://github.com/maciejkepa/ai-ml-in-practice
 
 This will clone the workshop materials directly into your workspace.
-

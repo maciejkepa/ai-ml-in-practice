@@ -1,0 +1,16 @@
+command:
+  - uvicorn
+  - server.main:app
+  - --host
+  - 0.0.0.0
+  - --port
+  - $DATABRICKS_APP_PORT
+env:
+  - name: CATALOG_NAME
+    value: ai_ml_in_practice
+  - name: SCHEMA_NAME
+    value: genai_workshop
+  - name: VECTOR_SEARCH_ENDPOINT_NAME
+    value: genai-workshop-search
+  - name: VECTOR_SEARCH_INDEX_NAME
+    value: ai_ml_in_practice.genai_workshop.document_chunks_rag_index

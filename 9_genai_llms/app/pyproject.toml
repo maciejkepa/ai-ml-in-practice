@@ -1,0 +1,15 @@
+[project]
+name = "genai-workshop-mcp"
+version = "0.1.0"
+description = "Databricks App exposing workshop tools over MCP"
+requires-python = ">=3.11"
+dependencies = [
+    "databricks-sdk",
+    "databricks-ai-search",
+    "mcp[cli]",
+    "fastapi",
+    "uvicorn",
+]
+
+[tool.ruff]
+line-length = 100
